@@ -1,32 +1,42 @@
 # Job Tracker
 
-Watches 3 public academic/research job boards for new postings and notifies Sing-Hao when something looks like a fit, based on resume/CV/research statements.
+Watches public academic/research job boards for new postings and notifies you when something looks like a fit, based on your resume/CV/research statements.
 
-## Sites tracked
-
+Currently configured for:
 - NYU Faculty and Researcher Careers
 - NBER Research Assistant Positions (not at NBER)
 - Columbia Academic Search and Recruiting
 
-See `config.json` for URLs and profile document paths.
-
-## Why not LinkedIn/Handshake
-
-Both require login and their terms of service prohibit automated scraping/bots — this tracker is scoped to public, no-login job boards only.
+See `config.json` for the exact URLs.
 
 ## How it works
 
-A scheduled Claude agent runs daily, following `RUNBOOK.md`:
-1. Fetches current listings from each site.
-2. Diffs against `state/<slug>.json` to find postings not seen before.
-3. Scores new postings against the resume/CV/research statements referenced in `config.json` (kept outside this repo — see below).
-4. Writes a dated digest to `digests/`.
-5. Sends a push notification for strong matches only.
+A scheduled Claude cloud agent (a "routine" in [claude.ai/code](https://claude.ai/code)) runs on a cron schedule, following the steps in `RUNBOOK.md`:
 
-## Profile documents
+1. Fetches current listings from each site in `config.json`.
+2. Diffs against `state/<slug>.json` to find postings not seen on a previous run.
+3. If there are new postings, reads your profile documents (via the Google Drive connector — see below) and scores each new posting for fit.
+4. Writes a dated digest to `digests/YYYY-MM-DD.md`.
+5. Sends a push notification only for strong matches.
+6. Commits and pushes the updated state/digest back to this repo, so tomorrow's run knows what's already been seen.
 
-Resume, CV, and research statements are **not stored in this repo**. The scheduled agent reads them via the Google Drive connector (see `config.json` → `profile_documents` for filenames and folder). This repo is public, so no personal documents belong here.
+## Why this repo is safe to be public
 
-## Repo scope
+This repo only ever contains: site URLs, the matching logic/instructions, and the *history* of public job postings (titles, links, dates) plus the tracker's own generated notes about them. It never contains your resume, CV, or any personal document — those are read live from Google Drive at run time and are never written to disk in this repo or committed.
 
-This repo tracks only public job-posting metadata (titles, links, dates) and the tracker's own logic — no personal documents, no credentials.
+## Setting this up for yourself
+
+1. **Fork or clone this repo.**
+2. **Put your resume/CV/research statements in Google Drive** (any folder — just note the folder name).
+3. **Edit `config.json`:**
+   - `sites`: the job boards you want tracked. Must be public, no-login pages — do not point this at LinkedIn, Handshake, or any site that requires authentication; both prohibit automated scraping in their terms of service.
+   - `profile_documents`: your Drive folder name and the filenames of your resume/CV/statements. Add or rename the "track" categories to match how you organize your own materials.
+4. **Edit `RUNBOOK.md`** if your fit criteria differ (e.g. seniority level, disciplines to ignore) — it's plain instructions the agent follows each run, so just edit the prose.
+5. **On [claude.ai](https://claude.ai):**
+   - Settings → Customize → Connectors: connect **GitHub** (grant it access to your fork) and **Google Drive**.
+   - Go to [claude.ai/code/routines](https://claude.ai/code/routines) → New routine → select your fork as the repository → attach both connectors → set a daily schedule → point the instructions at `RUNBOOK.md` in this repo.
+
+## Notes
+
+- Never point this at a site that requires login or prohibits automated access (LinkedIn and Handshake both do) — it's scoped to public, no-login boards only.
+- `state/` and `digests/` are committed to git so history survives between runs (each scheduled run is a fresh, isolated checkout with no persistent disk of its own).
