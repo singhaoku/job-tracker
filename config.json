@@ -40,8 +40,9 @@
     "note": "These files are NOT in this repo (kept out for privacy since this repo is public). Use the Google Drive connector to search for and read each filename (they live in the user's 'My Drive/2026 Spring Full Time' folder) rather than a local file path. These 3 sites are academic/research job boards, so weight research_track highest. Still consider quant_marketing_track for marketing/data-adjacent research roles (e.g. Stern Marketing dept postings) since the candidate has that background too."
   },
   "notification": {
-    "method": "push",
-    "note": "No email connector available. PushNotification tool only. Also write a dated digest file under digests/ every run regardless of matches, so there's a readable log even when no push fires."
+    "method": "email",
+    "email_to": "sk11234@nyu.edu",
+    "note": "Send via the Gmail connector (send-only scope — do not read the inbox). Also try PushNotification as a bonus channel; it's a no-op if the phone isn't paired via Remote Control, so it's safe to attempt regardless. Also write a dated digest file under digests/ every run regardless of matches, so there's a readable log even when nothing is sent."
   },
   "recency_window_days": 7
 }
