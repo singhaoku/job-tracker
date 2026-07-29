@@ -1,0 +1,39 @@
+{
+  "sites": [
+    {
+      "slug": "nyu-faculty-research",
+      "name": "NYU Faculty and Researcher Careers",
+      "url": "https://www.nyu.edu/about/careers-at-nyu/faculty-and-researchers.html",
+      "notes": "Public listing table, ~450+ postings, filterable by type/school. No login required. Has a JS bot-challenge on first load; a real browser handles it automatically."
+    },
+    {
+      "slug": "nber-ra-positions",
+      "name": "NBER Research Assistant Positions (not at NBER)",
+      "url": "https://www.nber.org/career-resources/research-assistant-positions-not-nber",
+      "notes": "Static page, plain link list of predoc/RA postings at other institutions sponsored by NBER-affiliated researchers. No login required."
+    },
+    {
+      "slug": "columbia-academic-careers",
+      "name": "Columbia Academic Search and Recruiting",
+      "url": "https://academic.careers.columbia.edu/",
+      "notes": "Public listing, ~600+ postings, filterable. No login required."
+    }
+  ],
+  "profile_documents": {
+    "source": "google_drive_connector",
+    "drive_folder": "2026 Spring Full Time",
+    "research_track": [
+      "Sing-HaoKu_Resume.pdf",
+      "Sing-HaoKu_CV.pdf",
+      "Sing-HaoKu_ResearchStatement_P.pdf"
+    ],
+    "quant_marketing_track": [
+      "Sing-HaoKu_ResearchStatement_M.pdf"
+    ],
+    "note": "These files are NOT in this repo (kept out for privacy since this repo is public). Use the Google Drive connector to search for and read each filename (they live in the user's 'My Drive/2026 Spring Full Time' folder) rather than a local file path. These 3 sites are academic/research job boards, so weight research_track highest. Still consider quant_marketing_track for marketing/data-adjacent research roles (e.g. Stern Marketing dept postings) since the candidate has that background too."
+  },
+  "notification": {
+    "method": "push",
+    "note": "No email connector available. PushNotification tool only. Also write a dated digest file under digests/ every run regardless of matches, so there's a readable log even when no push fires."
+  }
+}
