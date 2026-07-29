@@ -42,5 +42,6 @@
   "notification": {
     "method": "push",
     "note": "No email connector available. PushNotification tool only. Also write a dated digest file under digests/ every run regardless of matches, so there's a readable log even when no push fires."
-  }
+  },
+  "recency_window_days": 7
 }
