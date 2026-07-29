@@ -24,7 +24,10 @@ Instructions for the scheduled agent run. Read `config.json` in this folder firs
 
 6. If there is at least one strong match, send an email via the Gmail connector to `config.json` → `notification.email_to` (send-only — do not read or search the inbox), with a subject like `Job Tracker: N strong match(es) — YYYY-MM-DD` and a body listing each strong match (title, institution, link, one-line fit note). Also attempt one `PushNotification` with the same short summary (keep under 200 characters) — it's harmless if no phone is paired, so send it regardless of whether that's set up. If there are postings in the digest but none are strong matches, do not send either notification — the digest file is enough.
 
-7. Commit the updated `state/` and `digests/` files to git with a short message like `chore: job tracker run YYYY-MM-DD`, and **push to origin main**. This is essential: each scheduled run starts from a fresh checkout of this repo, so if the updated state isn't pushed, tomorrow's run won't know what was already seen today and will re-notify on the same postings.
+7. Commit the updated `state/` and `digests/` files to git with a short message like `chore: job tracker run YYYY-MM-DD`. Direct push to `main` is not permitted for this integration — instead:
+   - Create a new branch (e.g. `tracker-run-YYYY-MM-DD`) and push the commit there.
+   - This should auto-open a PR into `main` (Claude's "create pull requests automatically" setting). If it doesn't happen automatically, open one explicitly.
+   - Try to enable auto-merge on that PR (the repo has "Allow auto-merge" turned on) so it merges without a human clicking anything. If the available tools can't enable auto-merge or merge it directly, say so plainly in the digest — don't silently leave it as an open, unmerged PR, since tomorrow's run needs `main` updated to know what's already been seen. An open-but-unmerged PR is effectively a failed run for diffing purposes.
 
 ## Notes
 
