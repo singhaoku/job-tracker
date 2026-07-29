@@ -1,16 +1,23 @@
 {
+  "audience": "Econ graduate students/predoc candidates looking for research opportunities (RA, predoc, junior research scientist roles), based in the NY metropolitan area. Prioritize NYC-metro postings (NYU, Columbia, and any NY-based labs surfaced via NBER/predoc.org), but still surface strong non-NY research opportunities since predoc/RA roles are a national market and relocation is common in this field.",
   "sites": [
     {
       "slug": "nyu-faculty-research",
       "name": "NYU Faculty and Researcher Careers",
       "url": "https://www.nyu.edu/about/careers-at-nyu/faculty-and-researchers.html",
-      "notes": "Public listing table, ~450+ postings, filterable by type/school. No login required. Has a JS bot-challenge on first load; a real browser handles it automatically."
+      "notes": "Public listing table, ~450+ postings, filterable by type/school. No login required. Has a JS bot-challenge on first load; a real browser handles it automatically. Use the base URL without a '?challenge=' query param — that token is single-use/session-specific and goes stale."
     },
     {
       "slug": "nber-ra-positions",
       "name": "NBER Research Assistant Positions (not at NBER)",
       "url": "https://www.nber.org/career-resources/research-assistant-positions-not-nber",
       "notes": "Static page, plain link list of predoc/RA postings at other institutions sponsored by NBER-affiliated researchers. No login required."
+    },
+    {
+      "slug": "predoc-opportunities",
+      "name": "Predoc.org Opportunities",
+      "url": "https://www.predoc.org/opportunities",
+      "notes": "Public listing, filterable by Region/Research Area/Employer Type. No login required. Has a 'Show More' button that paginates via JS — click through it to capture the full current listing, not just the first page. The Region filter includes 'Northeast', useful given the NY-metro audience."
     },
     {
       "slug": "columbia-academic-careers",

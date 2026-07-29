@@ -2,9 +2,12 @@
 
 Watches public academic/research job boards for new postings and notifies you when something looks like a fit, based on your resume/CV/research statements.
 
+Built for econ graduate students/predoc candidates looking for research opportunities (RA, predoc, junior research scientist roles), based in the NY metropolitan area — see `config.json` → `audience` to adjust for a different field or location.
+
 Currently configured for:
 - NYU Faculty and Researcher Careers
 - NBER Research Assistant Positions (not at NBER)
+- Predoc.org Opportunities
 - Columbia Academic Search and Recruiting
 
 See `config.json` for the exact URLs.

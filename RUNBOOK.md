@@ -12,9 +12,10 @@ Instructions for the scheduled agent run. Read `config.json` in this folder firs
 
 2. If there are zero new postings across all sites, write a one-line entry to today's digest (see below) noting nothing new, and stop. Do not send a push notification for a zero-match run.
 
-3. If there are new postings, use the Google Drive connector to find and read the profile documents listed in `config.json` → `profile_documents` (search by filename in the `drive_folder`; these are not stored in this repo). For each new posting, judge fit:
+3. If there are new postings, use the Google Drive connector to find and read the profile documents listed in `config.json` → `profile_documents` (search by filename in the `drive_folder`; these are not stored in this repo). For each new posting, judge fit against `config.json` → `audience` and the profile documents:
    - Consider field/discipline match, seniority (predoc/RA/postdoc/junior research scientist level — not tenure-track faculty roles, which don't fit this candidate's career stage), and institution.
-   - Weight `research_track` documents primarily since these 3 sites are academic/research boards; consider `quant_marketing_track` for marketing- or data-adjacent research roles.
+   - Weight `research_track` documents primarily since these sites are academic/research boards; consider `quant_marketing_track` for marketing- or data-adjacent research roles.
+   - Location: treat NY-metro postings (NYU, Columbia, or any NYC/NY-metro institution surfaced via NBER/predoc.org) as a plus, not a hard filter — still surface strong non-NY matches, but call out location explicitly in the digest so it's easy to scan for local opportunities.
    - Ignore postings clearly outside scope (tenure-track faculty searches, senior staff/administrative roles, unrelated disciplines like clinical medicine, K-12 teaching, etc.) unless there's a clear reason they'd fit.
 
 4. Write a digest file at `digests/YYYY-MM-DD.md` (use the run date) listing every new posting found, grouped by site, with: title, institution/dept, link, and a one-line fit assessment. Mark strong matches clearly (e.g. `**STRONG MATCH**`).
